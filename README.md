@@ -1,24 +1,36 @@
-# README
+# ラヲタ荘
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+- ラーメンの画像と感想を投稿する
+- 投稿からデータを抽出し、数値やグラフで表示
+- 自分が過去に食べたラーメンを振り返ったり、他ユーザの投稿やデータを確認できる
+- 食べた回数でラーメン愛ランキングをつけることによって競争心を煽る
 
-Things you may want to cover:
+### サイトテーマ
+自分が食べたラーメンを投稿し、記録するサイト
 
-* Ruby version
+### テーマを選んだ理由
+インスタグラムには常にラーメンの写真が投稿されているほどラーメン好きが多い印象です。そんな私もラーメンを年間100食以上食べるラーメンヲタクです。
+これまで食べたラーメンの件数やスープの種類などを記録し、自分や友人のデータを見れるようになれば面白いのではないかと考えました。
+また、私の地元には訪れた回数を店側が記録し、その上位の客の名前を店内に飾るという変わった取り組みから学生から社会人まで多く訪れる常に満席のラーメン屋があります。
+ランキング機能によって競争心を煽り、コロナの影響により外食が減っているこの世の中で、ラーメン業界が少しでも盛り上がればと思い、このテーマを選定しました。
 
-* System dependencies
+### ターゲットユーザ
+ラーメンをこよなく愛する人
 
-* Configuration
+### 主な利用シーン
+自分が食べたラーメンを感想とともに記録し、共有する。
 
-* Database creation
+## 設計書
+<...>
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
