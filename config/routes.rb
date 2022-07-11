@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :public do
+    resources :ramens, only: [:new, :index, :edit, :create]
+  end
+
+  namespace :public do
+    root to: "homes#top"
+  end
   # 会員用
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",

@@ -1,0 +1,15 @@
+<%= form_with model: @ramen, url:public_root_path do |f| %>
+  <label for="inputTitle">画像</label><br>
+  <%= f.file_field :image, accept: "image/*" %>
+  <div class="form-group">
+  <label for="inputTitle">店名</label><br>
+  <%= f.text_field :restaurant_name, type:"text", class:"form-control" %>
+  </div>
+  <div class="form-group">
+  <label for="inputOpinion">感想</label><br>
+  <%= f.text_area :impression, type:"text", class:"form-control" %>
+  </div>
+  <div class="form-group">
+  <%= f.submit '投稿', class: "btn btn-success" %>
+  </div>
+<% end %>
