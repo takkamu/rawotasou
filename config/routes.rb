@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   namespace :public do
+    get 'customers/index'
+    get 'customers/show'
+    get 'customers/edit'
+  end
+  namespace :public do
     resources :ramens, only: [:new, :index, :edit, :create]
+    resources :customers, only: [:index, :edit, :show, :update]
+    get 'customers/:id/unsubscribe' => 'customers#unsubscribe'
+    patch 'customers/:id/withdraw' => 'customers#withdraw'
   end
 
   namespace :public do

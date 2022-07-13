@@ -1,4 +1,4 @@
-<%= form_with model: @ramen, url:public_root_path do |f| %>
+<%= form_with model: @ramen, url:public_ramens_path do |f| %>
   <label for="inputTitle">画像</label><br>
   <%= f.file_field :image, accept: "image/*" %>
   <div class="form-group">

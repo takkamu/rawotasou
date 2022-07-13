@@ -1,0 +1,20 @@
+編集ページ
+
+<%= form_with(model: @customer, url:public_customer_path, local: true, method: :patch) do |f| %>
+      <table class="table-box">
+        <tr>
+          <th>名前</th>
+          <td><%= f.text_field :name, class: "ml-2" %></td>
+        </tr>
+        <tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= f.text_field :email, class: "ml-2" %></td>
+        </tr>
+      </table>
+
+        <p>
+        <%= f.submit "編集内容を保存", class: "btn btn-success col-sm-3", style: "margin: 20px;" %>
+        <%= link_to '退会する', public_customers_unsubscribe_path, class: "btn btn-danger col-sm-3", style: "margin: 20px;" %>
+        </p>
+      <% end %>
