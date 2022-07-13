@@ -33,8 +33,8 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       t.string :name, null: false
-      t.integer :experience_point, null: false
-      t.integer :level, null: false
+      t.integer :experience_point, null: false, default: 0
+      t.integer :level, null: false, default: 1
       t.boolean :is_deleted, null: false, default: false
 
       t.timestamps null: false

@@ -11,6 +11,59 @@
   </head>
 
   <body>
+    <header>
+    <% if customer_signed_in? %>
+            <li>
+              <!--<#%= link_to "", customers_path(current_customer), class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <!--<#%= link_to "", items_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+            <!--<#%= link_to "", cart_items_index_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %>
+            </li>
+
+          <% elsif admin_signed_in? %>
+
+            <li>
+              <!--<#%= link_to "", admin_items_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <!--<#%= link_to "", admin_customers_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <!--<#%= link_to "", admin_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <!--<#%= link_to "", admin_genres_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %>
+            </li>
+
+          <% else %>
+
+            <li>
+              <!--<#%= link_to "", about_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <!--<#%= link_to "", items_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            </li>
+            <li>
+              <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+            </li>
+
+          <% end %>
+
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
