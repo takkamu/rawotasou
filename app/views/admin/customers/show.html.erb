@@ -14,6 +14,14 @@
     <td><%= @customer.email %></td>
   </tr>
   <tr>
+    <th>レベル</th>
+    <td><%= @customer.level %></td>
+  </tr>
+  <tr>
+    <th>経験値</th>
+    <td><%= @customer.experience_point %></td>
+  </tr>
+  <tr>
     <th>会員ステータス</th>
     <td>
       <% if @customer.is_deleted == true %>
@@ -24,5 +32,3 @@
     </td>
   </tr>
 </table>
-
-<%= link_to '退会する', public_path, class: "btn btn-danger col-sm-3", style: "margin: 20px;" %>
