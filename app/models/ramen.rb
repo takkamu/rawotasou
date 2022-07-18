@@ -9,4 +9,7 @@ class Ramen < ApplicationRecord
     end
     image
   end
+
+  enum men_genre: { ramen: 0, tsukemen: 1, shirunashi: 2, others: 3 }, _prefix: true
+  enum soup_genre: { shoyu: 0, shio: 1, miso: 2, tonkotsu: 3, tonkotsushoyu: 4, tonkotsushio: 5, tonkotsumiso: 6, seafood: 7, curry: 8, others: 9 }, _prefix: true
 end

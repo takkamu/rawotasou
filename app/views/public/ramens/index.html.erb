@@ -1,9 +1,10 @@
 <% @ramens.each do |ramen| %>
 <div>
-  <%= image_tag ramen.get_image %>
-  <p>画像：<%= image_tag 'sample-author1.jpg' %></p>
+  <p>ユーザーネーム：<%= ramen.customer.name %></p>
+  <p>画像：<%= image_tag ramen.image, size:"200x200" %></p>
   <p>ショップ名：<%= ramen.restaurant_name %></p>
+  <p>麺類：<%= ramen.men_genre_i18n %></p>
+  <p>スープ：<%= ramen.soup_genre_i18n %></p>
   <p>感想：<%= ramen.impression %></p>
-  <p>ユーザーネーム：<%= ramen.user.name %></p>
 </div>
 <% end %>

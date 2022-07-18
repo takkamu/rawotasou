@@ -1,0 +1,19 @@
+ ja:
+    enums:
+      ramen:
+        men_genre:
+          ramen: "ラーメン"
+          tsukemen: "つけ麺"
+          shirunashi: "汁なし"
+          others: "その他"
+        soup_genre:
+          shoyu: "醤油"
+          shio: "塩"
+          miso: "味噌"
+          tonkotsu: "豚骨"
+          tonkotsushoyu: "豚骨醤油"
+          tonkotsushio: "豚骨塩"
+          tonkotsumiso: "豚骨味噌"
+          seafood: "魚介"
+          curry: "カレー"
+          others: "その他"

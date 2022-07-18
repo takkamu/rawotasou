@@ -5,6 +5,21 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
+
+    #投稿数推移グラフ
+    #日別投稿数
+    @ramens = @customer.ramens
+    @ramen_by_day = @ramens.group_by_day(:created_at).size
+    @chartlabels = @ramen_by_day.map(&:first).to_json.html_safe
+    @chartdatas = @ramen_by_day.map(&:second)
+
+    #累積投稿数
+    @cumulative = []
+    sum=0
+    @chartdatas.each do |a|
+      sum = sum + a
+      @cumulative<<sum
+    end
   end
 
   def edit
@@ -26,7 +41,7 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = current_customer
-    @customer.update(is_active: true)
+    @customer.update(is_deleted: true)
     reset_session
     redirect_to root_path
   end

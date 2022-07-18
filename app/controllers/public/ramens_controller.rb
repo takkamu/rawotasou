@@ -1,13 +1,17 @@
 class Public::RamensController < ApplicationController
+  before_action :authenticate_customer!, except: [:index]
+
   def new
     @ramen = Ramen.new
   end
 
   def create
     @ramen = Ramen.new(ramen_params)
-    @ramen.customer.id = current_customer.id
+    @ramen.customer_id = current_customer.id
     if @ramen.save
-      redirect_to public_root
+      redirect_to ramens_path(@ramen)
+    else
+      render :new
     end
   end
 
@@ -17,12 +21,12 @@ class Public::RamensController < ApplicationController
 
   def edit
   end
-  
-  
+
+
 
   private
 
   def ramen_params
-    params.require(:ramen).permit(:image, :restaurant_name, :men_genre, :soup_genre, :impression)
+    params.require(:ramen).permit(:image, :restaurant_name, :impression, :men_genre, :soup_genre)
   end
 end

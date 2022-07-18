@@ -25,4 +25,56 @@
   </tr>
 </table>
 
-<%= link_to '退会する', public_path, class: "btn btn-danger col-sm-3", style: "margin: 20px;" %>
+<%= link_to '退会する', unsubscribe_path, class: "btn btn-danger col-sm-3", style: "margin: 20px;" %>
+
+
+<canvas id="myChart" width="200" height="50"> </canvas>
+<canvas id="myChart2" width="200" height="50"> </canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <%= @chartlabels %>,  // 横軸にとるデータ(投稿日付)
+            datasets: [{
+                label: "投稿数",
+                data: <%= @chartdatas %>, // 縦軸にとるデータ(投稿数)
+                backgroundColor: 'rgba(255, 80, 120, 1.0)',
+                borderColor: 'rgba(255, 80, 120, 1.0)',
+                fill: false
+            },{
+                label: "累積投稿数",
+                data: <%= @cumulative %>, // 縦軸にとるデータ(累積投稿数)
+                backgroundColor: 'rgba(255, 80, 120, 0.2)',
+                borderColor: 'rgba(255, 80, 120, 1.0)',
+                type: 'line',
+            }]
+        },
+    });
+
+    var ctx = document.getElementById("myChart2");
+    var myChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ["ラーメン", "つけ麺", "汁なし", "その他"],
+        datasets:
+        [
+            {
+            label: "麺類",
+            backgroundColor: 'rgba(122,255,129,0.2)',
+            borderColor: 'rgba(122,255,129,0.2)',
+            data: [<%= @ramens.where(men_genre: "ramen").count %>, <%= @ramens.where(men_genre: "tsukemen").count %>, <%= @ramens.where(men_genre: "shirunashi").count %>, <%= @ramens.where(men_genre: "others").count %>]
+            },
+        ]
+      },
+      options: {
+          scale: {
+              ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 5
+              }
+          }
+      }
+    });
+</script>
