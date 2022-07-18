@@ -62,3 +62,5 @@ gem 'enum_help'
 gem 'chart-js-rails', '~> 0.1.4'
 
 gem 'groupdate'
+
+gem 'jquery-rails'

@@ -17,6 +17,7 @@ class Public::RamensController < ApplicationController
 
   def index
     @ramens = Ramen.all
+    @ramen = Ramen.new
   end
 
   def edit

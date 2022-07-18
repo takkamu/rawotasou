@@ -1,23 +1,36 @@
-<% @ramens.each do |ramen| %>
-<div>
-  <p>ユーザーネーム：<%= ramen.customer.name %></p>
-  <p>画像：<%= image_tag ramen.image, size:"200x200" %></p>
-  <p>ショップ名：<%= ramen.restaurant_name %></p>
-  <p>麺類：<%= ramen.men_genre_i18n %></p>
-  <p>スープ：<%= ramen.soup_genre_i18n %></p>
-  <p>感想：<%= ramen.impression %></p>
-  <% if ramen.favorited_by?(current_customer) %>
-    <p>
-      <%= link_to ramen_favorites_path(ramen), method: :delete do %>
-        ♥<%= ramen.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to ramen_favorites_path(ramen), method: :post do %>
-        ♡<%= ramen.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<% @ramens.each do |ramen| %>
+<tr>
+  <td>ユーザーネーム：<%= ramen.customer.name %></td>
+  <td>画像：<%= image_tag ramen.image, size:"200x200" %></td>
+  <td>ショップ名：<%= ramen.restaurant_name %></td>
+  <td>麺類：<%= ramen.men_genre_i18n %></td>
+  <td>スープ：<%= ramen.soup_genre_i18n %></td>
+  <td>感想：<%= ramen.impression %></td>
+  <td id="favorite_buttons_<%= ramen.id %>">
+    <%= render "favorites/favorite", ramen: ramen %>
+  </td>
+</tr>
 <% end %>
