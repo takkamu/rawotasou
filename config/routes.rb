@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    resources :ramens, only: [:new, :index, :edit, :create]
+    resources :ramens, only: [:new, :index, :edit, :create] do
+      resource :favorites, only: [:create, :destroy]
+    end
     resources :customers, only: [:index, :edit, :show, :update]
     get 'customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw'

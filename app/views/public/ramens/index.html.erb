@@ -6,5 +6,18 @@
   <p>麺類：<%= ramen.men_genre_i18n %></p>
   <p>スープ：<%= ramen.soup_genre_i18n %></p>
   <p>感想：<%= ramen.impression %></p>
+  <% if ramen.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to ramen_favorites_path(ramen), method: :delete do %>
+        ♥<%= ramen.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to ramen_favorites_path(ramen), method: :post do %>
+        ♡<%= ramen.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
 </div>
 <% end %>

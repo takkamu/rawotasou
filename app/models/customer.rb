@@ -4,8 +4,9 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :ramens, dependent: :destroy
   has_one_attached :profile_image
+  has_many :ramens, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def get_profile_image
     unless profile_image.attached?
@@ -14,7 +15,7 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [100, 100]).processed
   end
-  
+
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |guest|
       guest.password = SecureRandom.urlsafe_base64

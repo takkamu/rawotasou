@@ -1,6 +1,7 @@
 class Ramen < ApplicationRecord
   belongs_to :customer
   has_one_attached :image
+  has_many :favorites, dependent: :destroy
 
   def get_image
     unless image.attached?
@@ -8,6 +9,10 @@ class Ramen < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     image
+  end
+
+  def favorited_by?(customer)
+    favorites.exists?(customer_id: customer.id)
   end
 
   enum men_genre: { ramen: 0, tsukemen: 1, shirunashi: 2, others: 3 }, _prefix: true
