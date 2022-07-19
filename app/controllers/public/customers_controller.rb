@@ -4,7 +4,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
 
     #投稿数推移グラフ
     #日別投稿数
