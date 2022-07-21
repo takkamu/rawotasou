@@ -7,11 +7,11 @@ class Public::RamensController < ApplicationController
 
   def create
     @ramen = Ramen.new(ramen_params)
+    @ramens = Ramen.all
     @ramen.customer_id = current_customer.id
     if @ramen.save
-      redirect_to ramens_path(@ramen)
     else
-      render :new
+      render :index
     end
   end
 

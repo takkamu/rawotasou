@@ -1,0 +1,28 @@
+<table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th>ユーザーネーム</th>
+      <th>画像</th>
+      <th>ショップ名</th>
+      <th>麺類</th>
+      <th>スープ</th>
+      <th>感想</th>
+      <th>いいね</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% ramens.each do |ramen| %>
+      <tr>
+        <td><%= ramen.customer.name %></td>
+        <td><%= image_tag ramen.image, size:"200x200" %></td>
+        <td><%= ramen.restaurant_name %></td>
+        <td><%= ramen.men_genre_i18n %></td>
+        <td><%= ramen.soup_genre_i18n %></td>
+        <td><%= ramen.impression %></td>
+        <td id="favorite_buttons_<%= ramen.id %>">
+          <%= render "public/favorites/favorite", ramen: ramen %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
