@@ -1,24 +1,11 @@
-<h2>Results index</h2>
+<h2>検索結果</h2>
 
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがCustomerの時 -->
   <% if @range == "Customer" %>
-    <tbody>
-      <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <%= render "public/relationships/follow_list", customers: @customers %>
   <% else %>
     <!--検索対象モデルがCustomerではない時 -->
-    <tbody>
-      <% @ramens.each do |ramen| %>
-        <tr>
-          <td><%= ramen.restaurant_name %></td>
-          <td><%= ramen.impression %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <%= render "public/ramens/ramens", ramens: @ramens %>
   <% end %>
 </table>

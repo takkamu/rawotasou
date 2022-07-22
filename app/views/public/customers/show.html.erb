@@ -32,12 +32,24 @@
       <% end %>
     </td>
     <td>
-      <%= link_to 'フォロー', customer_followings_path(@customer.id) %>
+      <p>フォロー中
+        <%= link_to customer_followings_path(@customer.id) do %>
+          <%= @customer.followings.count %>
+        <% end %>人
+      </p>
+      <p>フォロワー
+        <%= link_to customer_followers_path(@customer.id) do %>
+          <%= @customer.followers.count %>
+        <% end %>人
+      </p>
     </td>
+    <% if @customer == current_customer %>
+      <td><%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-sm btn-success" %></td>
+    <% end %>
   </tr>
 </table>
 
-<%= link_to '退会する', unsubscribe_path, class: "btn btn-danger col-sm-3", style: "margin: 20px;" %>
+<%= render "public/ramens/ramens", ramens: @ramens %>
 
 
 <canvas id="myChart" width="200" height="50"> </canvas>

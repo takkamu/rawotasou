@@ -22,11 +22,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :customers, only: [:index, :edit, :show, :update]
+    resources :ramens, only: [:index, :destroy]
   end
 
   scope module: :public do
     root to: "homes#top"
-    resources :ramens, only: [:new, :index, :edit, :create] do
+    resources :ramens, only: [:new, :index, :create, :destroy] do
       resource :favorites, only: [:create, :destroy]
     end
     resources :customers, only: [:index, :edit, :show, :update] do

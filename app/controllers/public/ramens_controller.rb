@@ -20,7 +20,10 @@ class Public::RamensController < ApplicationController
     @ramen = Ramen.new
   end
 
-  def edit
+  def destroy
+    @ramen_destroy = Ramen.find(params[:id])
+    @ramen_destroy.destroy
+    redirect_to customer_path(current_customer)
   end
 
 

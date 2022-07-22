@@ -7,14 +7,13 @@
       <th>麺類</th>
       <th>スープ</th>
       <th>感想</th>
-      <th>いいね</th>
     </tr>
   </thead>
   <tbody>
     <% ramens.each do |ramen| %>
       <tr>
         <td>
-          <%= link_to customer_path(ramen.customer) do %>
+          <%= link_to admin_customer_path(ramen.customer) do %>
             <%= ramen.customer.name %>
           <% end %>
         </td>
@@ -23,15 +22,8 @@
         <td><%= ramen.men_genre_i18n %></td>
         <td><%= ramen.soup_genre_i18n %></td>
         <td><%= ramen.impression %></td>
-        <td id="favorite_buttons_<%= ramen.id %>">
-          <%= render "public/favorites/favorite", ramen: ramen %>
-        </td>
-        <% if ramen.customer == current_customer %>
-          <td><%= link_to 'Destroy', @ramen_destroy, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-        <% end %>
+        <td><%= link_to 'Destroy', @ramen, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-
