@@ -21,9 +21,9 @@ class Public::RamensController < ApplicationController
   end
 
   def destroy
-    @ramen_destroy = Ramen.find(params[:id])
-    @ramen_destroy.destroy
-    redirect_to customer_path(current_customer)
+    @ramen = Ramen.find(params[:id])
+    @ramen.destroy
+    redirect_to ramens_path
   end
 
 
