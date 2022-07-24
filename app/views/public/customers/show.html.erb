@@ -1,0 +1,126 @@
+詳細ページ
+
+<table class="table table-bordered">
+  <tr>
+    <th>会員ID</th>
+    <td><%= @customer.id %></td>
+  </tr>
+  <tr>
+    <th>名前</th>
+    <td><%= @customer.name %></td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @customer.email %></td>
+  </tr>
+  <tr>
+    <th>会員ステータス</th>
+    <td>
+      <% if @customer.is_deleted == true %>
+        <span class="text-danger">退会</span>
+      <% else %>
+      <span class="text-success">有効</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <% if current_customer.following?(@customer) %>
+        <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete %>
+      <% else %>
+        <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post %>
+      <% end %>
+    </td>
+    <td>
+      <p>フォロー中
+        <%= link_to customer_followings_path(@customer.id) do %>
+          <%= @customer.followings.count %>
+        <% end %>人
+      </p>
+      <p>フォロワー
+        <%= link_to customer_followers_path(@customer.id) do %>
+          <%= @customer.followers.count %>
+        <% end %>人
+      </p>
+    </td>
+    <% if @customer == current_customer %>
+      <td><%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-sm btn-success" %></td>
+    <% end %>
+  </tr>
+</table>
+
+<%= render "public/ramens/ramens", ramens: @ramens %>
+
+
+<canvas id="myChart" width="200" height="50"> </canvas>
+<canvas id="myChart2" width="200" height="50"> </canvas>
+<canvas id="myChart3" width="200" height="50"> </canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <%= @chartlabels %>,  // 横軸にとるデータ(投稿日付)
+            datasets: [{
+                label: "投稿数",
+                data: <%= @chartdatas %>, // 縦軸にとるデータ(投稿数)
+                backgroundColor: 'rgba(255, 80, 120, 1.0)',
+                borderColor: 'rgba(255, 80, 120, 1.0)',
+                fill: false
+            },{
+                label: "累積投稿数",
+                data: <%= @cumulative %>, // 縦軸にとるデータ(累積投稿数)
+                backgroundColor: 'rgba(255, 80, 120, 0.2)',
+                borderColor: 'rgba(255, 80, 120, 1.0)',
+                type: 'line',
+            }]
+        },
+    });
+
+    var ctx = document.getElementById("myChart2");
+    var myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ["ラーメン", "つけ麺", "汁なし", "その他"],
+        datasets:
+        [
+            {
+            label: "麺類",
+            backgroundColor: 'rgba(122,255,129,0.2)',
+            borderColor: 'rgba(122,255,129,0.2)',
+            data: [<%= @ramens.where(men_genre: "ramen").count %>, <%= @ramens.where(men_genre: "tsukemen").count %>, <%= @ramens.where(men_genre: "shirunashi").count %>, <%= @ramens.where(men_genre: "others").count %>]
+            },
+        ]
+      },
+      options: {
+          scale: {
+              ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 5
+              }
+          }
+      }
+    });
+
+    var ctx = document.getElementById("myChart3");
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ["醤油", "塩", "味噌", "豚骨", "豚骨醤油", "豚骨塩", "豚骨味噌", "魚介", "カレー", "その他"],
+        datasets:
+        [
+            {
+            label: "麺類",
+            backgroundColor: 'rgba(122,255,129,0.2)',
+            borderColor: 'rgba(122,255,129,0.2)',
+            data: [<%= @ramens.where(soup_genre: "shoyu").count %>, <%= @ramens.where(soup_genre: "shio").count %>, <%= @ramens.where(soup_genre: "miso").count %>, <%= @ramens.where(soup_genre: "tonkotsu").count %>, <%= @ramens.where(soup_genre: "tonkotsushoyu").count %>, <%= @ramens.where(soup_genre: "tonkotsushio").count %>, <%= @ramens.where(soup_genre: "tonkotsumiso").count %>, <%= @ramens.where(soup_genre: "seafood").count %>, <%= @ramens.where(soup_genre: "curry").count %>, <%= @ramens.where(soup_genre: "others").count %>]
+            },
+        ]
+      },
+      options: {
+          scale: {
+          }
+      }
+    });
+</script>
