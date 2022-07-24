@@ -1,0 +1,10 @@
+$("textarea").val("");
+$("input").val("");
+$('#exampleModal').removeClass('show');
+$('#exampleModal').css('display', 'none');
+$('#exampleModal').removeAttr('aria-modal');
+$('#exampleModal').removeAttr('role');
+$('#exampleModal').attr('aria-hidden', 'true');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('.ramens').html("<%= escape_javascript(render 'ramens', ramens: @ramens) %>");

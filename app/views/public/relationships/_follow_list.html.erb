@@ -1,0 +1,18 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% customers.each do |customer| %>
+    <tr>
+      <td><%= link_to customer.name, customer, class: "customer_#{customer.id}" %></td>
+      <td>フォロー数: <%= customer.followings.count %></td>
+      <td>フォロワー数: <%= customer.followers.count %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
