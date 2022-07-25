@@ -1,3 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3 text-right">
+      <h1>ラヲタ荘</h1>
+      <p>ラーメンであなたの生活を豊かに</p>
+      <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+      <p>
+        食べたラーメンを記録するだけで<br>
+        あなたの生活を可視化できる<br>
+        SNS型ラーメン記録サービス
+      </p>
+      <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+    </div>
+    <div class="col-3">
+      画像
+    </div>
+  </div>
+  <div class="row">
+    <div class="new_ramen_container bg-warning">
+      <h2 class="text-center">最近投稿されたラーメン</h2>
+      <div class="card-deck">
+      <% @ramens.each do |ramen| %>
+
+        <div class="card">
+          <%= image_tag ramen.image, class: 'card-img-top' %>
+          <div class="card-body">
+            <h5 class="card-title"><%= ramen.restaurant_name %></h5>
+            <p class="card-text">
+              <%= ramen.men_genre_i18n %>
+              <%= ramen.soup_genre_i18n %>
+              <%= ramen.impression %>
+            </p>
+            <p class="card-text"><small class="text-muted"><%= ramen.created_at %></small></p>
+          </div>
+        </div>
+
+      <% end %>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="overview_container">
+      <div class="">
+        <div class="row flex-row bg-success">
+          <div class="col-md-7 col">
+            <h2>あなたはラーメンを投稿するだけ</h2>
+            <p>
+              食べたラーメンの画像と情報を投稿するだけです。<br>
+              ラヲタ荘があなたの投稿を自動で分析します。
+            </p>
+          </div>
+          <div class="col-md-5 col">
+            画像
+          </div>
+        </div>
+        <div class="row flex-row-reverse bg-warning">
+          <div class="col-md-7 col">
+            <h2>あなたはラーメンを投稿するだけ</h2>
+            <p>
+              食べたラーメンの画像と情報を投稿するだけです。<br>
+              ラヲタ荘があなたの投稿を自動で分析します。
+            </p>
+          </div>
+          <div class="col-md-5 col">
+            画像
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1>ラヲタ荘</h1>
 <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
 <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>

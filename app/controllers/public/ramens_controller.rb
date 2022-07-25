@@ -9,11 +9,19 @@ class Public::RamensController < ApplicationController
     @ramen = Ramen.new(ramen_params)
     @ramens = Ramen.all
     @ramen.customer_id = current_customer.id
+
+    levelSetting = LevelSetting.find_by(level: current_customer.level + 1);
     if @ramen.save
+      current_customer.update(experience_point: current_customer.experience_point + 10)
+        if levelSetting.thresold <= current_customer.experience_point
+          current_customer.level = current_customer.level + 1
+          current_customer.update(level: current_customer.level)
+        end
     else
       render :index
     end
   end
+
 
   def index
     @ramens = Ramen.all
