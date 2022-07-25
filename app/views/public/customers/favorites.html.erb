@@ -1,0 +1,21 @@
+いいね一覧
+<% @favorite_ramens.each do |ramen|%>
+<tr>
+  <td>
+    <%= link_to customer_path(ramen.customer) do %>
+      <%= ramen.customer.name %>
+    <% end %>
+  </td>
+  <td><%= image_tag ramen.image, size:"200x200" %></td>
+  <td><%= ramen.restaurant_name %></td>
+  <td><%= ramen.men_genre_i18n %></td>
+  <td><%= ramen.soup_genre_i18n %></td>
+  <td><%= ramen.impression %></td>
+  <td id="favorite_buttons_<%= ramen.id %>">
+    <%= render "public/favorites/favorite", ramen: ramen %>
+  </td>
+  <% if ramen.customer == current_customer %>
+    <td><%= link_to 'Destroy', ramen_path(ramen), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+  <% end %>
+</tr>
+<% end %>

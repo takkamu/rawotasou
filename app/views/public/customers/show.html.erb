@@ -51,9 +51,16 @@
         <% end %>人
       </p>
     </td>
-    <% if @customer == current_customer %>
-      <td><%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-sm btn-success" %></td>
-    <% end %>
+  </tr>
+  <tr>
+      <th>
+        <% if @customer == current_customer %>
+          <%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-sm btn-success" %>
+        <% end %>
+      </th>
+      <td>
+        <%=link_to"お気に入り記事", favorites_customer_path(@customer) %>
+      </td>
   </tr>
 </table>
 
