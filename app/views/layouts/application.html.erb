@@ -20,7 +20,7 @@
 
           <ul class="navbar-nav d-flex align-items-right">
             <% if customer_signed_in? %>
-              <li >
+              <li>
                 <%= render "public/searches/search_form" %>
               </li>
               <li>
@@ -45,7 +45,7 @@
             <% else %>
 
               <li>
-              <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+              <%= link_to 'ゲストログイン', customers_guest_sign_in_path, class: "btn btn-outline-secondary rounded-pill ml-2 sign_in", method: :post %>
               </li>
               <li>
                 <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
