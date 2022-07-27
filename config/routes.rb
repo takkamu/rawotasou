@@ -30,9 +30,9 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
-      member do
-        get :favorites
-      end
+      # member do
+      #   get :favorites
+      # end
     end
     get 'customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw'

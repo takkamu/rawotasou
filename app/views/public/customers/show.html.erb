@@ -1,5 +1,3 @@
-詳細ページ
-
 <div class="jumbotron text-center">
   <h1 class="display-4"><%= @customer.name %></h1>
   <p class="lead">------------------自己紹介--------------------</p>
@@ -33,55 +31,67 @@
   </p>
 </div>
 
+<!--タブ切り替えボタン-->
 <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-light">
-    <div class="col text-center top-button">
-      <%= link_to "グラフ", customer_ramens_path, remote: true %>
+    <div class="col text-center graphs-link">
+      <%= link_to "グラフ", remote: true %>
     </div>
   </button>
   <button type="button" class="btn btn-light">
-    <div class="col text-center ramens">
-      <%= link_to "投稿", customer_ramens_path, remote: true %>
+    <div class="col text-center ramens-link">
+      <%= link_to "投稿", remote: true %>
     </div>
   </button>
   <button type="button" class="btn btn-light">
-    <div class="col text-center ramens">
-      <%= link_to "いいね", customer_ramens_path, remote: true %>
+    <div class="col text-center favorites-link">
+      <%= link_to "いいね", remote: true %>
     </div>
   </button>
 </div>
 
-
-<p>
-  <%=link_to"いいね", favorites_customer_path(@customer) %>
-</p>
-
-<div class="container top_graph">
+<!--グラフ-->
+<div class="container mt-3 graphs" style="display: none;">
   <div class="row d-flex justify-content-center">
-    <div class="col-sm-8">
+    <div class="col-sm-10">
       <canvas id="myChart"></canvas>
     </div>
   </div>
   <div class="row d-flex justify-content-center mt-5">
-    <div class="col-sm-4">
+    <div class="col-sm-5">
       <p class="text-center">麺類</p>
       <canvas id="myChart2"></canvas>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-5">
       <p class="text-center">スープ類</p>
       <canvas id="myChart3"></canvas>
     </div>
   </div>
 </div>
 
-  <div class="top_post" style="display: none;">
-    <%= render "public/ramens/ramens", ramens: @ramens %>
+<!--投稿一覧-->
+<div class="ramens" style="display: none;">
+  <div class="container mt-3">
+    <h2>投稿一覧</h2>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-sm-10">
+        <%= render "public/ramens/ramens", ramens: @ramens_new_order %>
+      </div>
+    </div>
   </div>
+</div>
 
-
-   <div class="top_favo" style="display: none;">
-    favor
+<!--いいね一覧-->
+<div class="favorites" style="display: none;">
+  <div class="container mt-3">
+    <h2>いいね <%= @ramens_favorite.count %>件</h2>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-sm-10">
+        <%= render "public/ramens/ramens", ramens: @ramens_favorite %>
+      </div>
+    </div>
   </div>
+</div>
 
 
 
@@ -159,22 +169,8 @@
           },]
       },
   });
-
-
-
-
 </script>
-<div class="row top-button">
-  <div class="col text-center">
-    <%= link_to "グラフ", customer_ramens_path, remote: true %>
-  </div>
-</div>
 
-<div class="row ramens">
-  <div class="col text-center">
-    <%= link_to "投稿一覧", customer_ramens_path, remote: true %>
-  </div>
-</div>
 
 
 

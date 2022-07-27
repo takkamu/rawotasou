@@ -7,7 +7,7 @@ class Public::RamensController < ApplicationController
 
   def create
     @ramen = Ramen.new(ramen_params)
-    @ramens = Ramen.all
+    @ramens = Ramen.limit(20).order("created_at DESC")
     @ramen.customer_id = current_customer.id
 
     levelSetting = LevelSetting.find_by(level: current_customer.level + 1);
@@ -24,7 +24,7 @@ class Public::RamensController < ApplicationController
 
 
   def index
-    @ramens = current_customer.ramens
+    @ramens = Ramen.limit(20).order("created_at DESC")
     @ramen = Ramen.new
   end
 
