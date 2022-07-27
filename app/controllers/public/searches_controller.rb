@@ -5,7 +5,7 @@ class Public::SearchesController < ApplicationController
     @range = params[:range]
 
     if @range == "会員"
-      @customers = Customer.looks(params[:search], params[:word])
+      @customers = Customer.looks(params[:search], params[:word]).where(is_deleted: false)
     else
       @ramens = Ramen.looks(params[:search], params[:word])
     end

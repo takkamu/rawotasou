@@ -22,7 +22,7 @@
         <td><%= ramen.men_genre_i18n %></td>
         <td><%= ramen.soup_genre_i18n %></td>
         <td><%= ramen.impression %></td>
-        <td><%= link_to 'Destroy', @ramen, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
+        <td><%= link_to 'Destroy', admin_ramen_path(ramen), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

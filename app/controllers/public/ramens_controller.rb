@@ -24,7 +24,8 @@ class Public::RamensController < ApplicationController
 
 
   def index
-    @ramens = Ramen.limit(20).order("created_at DESC")
+    @alive_customers = Customer.where(is_deleted: false)
+    @ramens = Ramen.where(customer: @alive_customers).limit(20).order("created_at DESC")
     @ramen = Ramen.new
   end
 

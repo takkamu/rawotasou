@@ -14,6 +14,11 @@ class Ramen < ApplicationRecord
     image
   end
 
+  def favorites_only_alive
+    alive = Customer.where(is_deleted: false)
+    favorites.where(customer: alive)
+  end
+
   #
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
