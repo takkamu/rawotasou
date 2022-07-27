@@ -24,7 +24,7 @@ class Public::RamensController < ApplicationController
 
 
   def index
-    @ramens = Ramen.all
+    @ramens = current_customer.ramens
     @ramen = Ramen.new
   end
 

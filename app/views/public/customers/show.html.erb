@@ -1,137 +1,180 @@
 詳細ページ
 
-<table class="table table-bordered">
-  <tr>
-    <th>会員ID</th>
-    <td><%= @customer.id %></td>
-  </tr>
-  <tr>
-    <th>名前</th>
-    <td><%= @customer.name %></td>
-  </tr>
-  <tr>
-    <th>メールアドレス</th>
-    <td><%= @customer.email %></td>
-  </tr>
-  <tr>
-    <th>レベル</th>
-    <td><%= @customer.level %></td>
-  </tr>
-  <tr>
-    <th>EXP</th>
-    <td><%= @customer.experience_point %></td>
-  </tr>
-  <tr>
-    <th>会員ステータス</th>
-    <td>
-      <% if @customer.is_deleted == true %>
-        <span class="text-danger">退会</span>
-      <% else %>
-      <span class="text-success">有効</span>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td id="follow_buttons_<%= @customer.id %>">
+<div class="jumbotron text-center">
+  <h1 class="display-4"><%= @customer.name %></h1>
+  <p class="lead">------------------自己紹介--------------------</p>
+  <hr class="my-4">
+  <p>
+    <span>レベル <%= @customer.level %></span>
+    <span class="ml-3">EXP <%= @customer.experience_point %></span>
+  </p>
+  <p>
+    <span>投稿 <%= @ramens.count %>件</span>
+  <span class="ml-3">フォロー中
+    <%= link_to customer_followings_path(@customer.id) do %>
+      <span id="followings_<%= @customer.id %>"><%= @customer.followings.count %></span>
+    <% end %>人
+  </span>
+  <span class="ml-3">フォロワー
+    <%= link_to customer_followers_path(@customer.id) do %>
+      <span id="followers_<%= @customer.id %>"><%= @customer.followers.count %></span>
+    <% end %>人
+  </span>
+  </p>
+  <p>
+    <span id="follow_buttons_<%= @customer.id %>">
       <%= render "public/relationships/follow", customer: @customer %>
-    </td>
-    <td>
-      <p>フォロー中
-        <%= link_to customer_followings_path(@customer.id) do %>
-          <%= @customer.followings.count %>
-        <% end %>人
-      </p>
-      <p>フォロワー
-        <%= link_to customer_followers_path(@customer.id) do %>
-          <%= @customer.followers.count %>
-        <% end %>人
-      </p>
-    </td>
-  </tr>
-  <tr>
-      <th>
-        <% if @customer == current_customer %>
-          <%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-sm btn-success" %>
-        <% end %>
-      </th>
-      <td>
-        <%=link_to"お気に入り記事", favorites_customer_path(@customer) %>
-      </td>
-  </tr>
-</table>
+    </span>
+    <% if @customer == current_customer %>
+      <span class="ml-3">
+        <%= link_to '編集', edit_customer_path(@customer), class: "btn btn-outline-light rounded-pill ml-2" %>
+      </span>
+    <% end %>
+  </p>
+</div>
 
-<%= render "public/ramens/ramens", ramens: @ramens %>
+<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-light">
+    <div class="col text-center top-button">
+      <%= link_to "グラフ", customer_ramens_path, remote: true %>
+    </div>
+  </button>
+  <button type="button" class="btn btn-light">
+    <div class="col text-center ramens">
+      <%= link_to "投稿", customer_ramens_path, remote: true %>
+    </div>
+  </button>
+  <button type="button" class="btn btn-light">
+    <div class="col text-center ramens">
+      <%= link_to "いいね", customer_ramens_path, remote: true %>
+    </div>
+  </button>
+</div>
 
 
-<canvas id="myChart" width="200" height="50"> </canvas>
-<canvas id="myChart2" width="200" height="50"> </canvas>
-<canvas id="myChart3" width="200" height="50"> </canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<p>
+  <%=link_to"いいね", favorites_customer_path(@customer) %>
+</p>
+
+<div class="container top_graph">
+  <div class="row d-flex justify-content-center">
+    <div class="col-sm-8">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="col-sm-4">
+      <p class="text-center">麺類</p>
+      <canvas id="myChart2"></canvas>
+    </div>
+    <div class="col-sm-4">
+      <p class="text-center">スープ類</p>
+      <canvas id="myChart3"></canvas>
+    </div>
+  </div>
+</div>
+
+  <div class="top_post" style="display: none;">
+    <%= render "public/ramens/ramens", ramens: @ramens %>
+  </div>
+
+
+   <div class="top_favo" style="display: none;">
+    favor
+  </div>
+
+
+
+
+
 <script>
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: <%= @chartlabels %>,  // 横軸にとるデータ(投稿日付)
-            datasets: [{
-                label: "投稿数",
-                data: <%= @chartdatas %>, // 縦軸にとるデータ(投稿数)
-                backgroundColor: 'rgba(255, 80, 120, 1.0)',
-                borderColor: 'rgba(255, 80, 120, 1.0)',
-                fill: false
-            },{
-                label: "累積投稿数",
-                data: <%= @cumulative %>, // 縦軸にとるデータ(累積投稿数)
-                backgroundColor: 'rgba(255, 80, 120, 0.2)',
-                borderColor: 'rgba(255, 80, 120, 1.0)',
-                type: 'line',
-            }]
-        },
-    });
+  //月別投稿数推移グラフ
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var labels = <%= @chartlabels %>
+  console.log(labels)
+  labels.forEach((element,index)=>{
+     labels[index] = element.slice(0,-3)
+  })
 
-    var ctx = document.getElementById("myChart2");
-    var myChart = new Chart(ctx, {
-      type: 'doughnut',
+  var myChart = new Chart(ctx, {
+      type: 'bar',
       data: {
-        labels: ["ラーメン", "つけ麺", "汁なし", "その他"],
-        datasets:
-        [
+          labels: labels ,// 横軸にとるデータ(投稿月)
+          datasets: [
             {
-            label: "麺類",
-            backgroundColor: 'rgba(122,255,129,0.2)',
-            borderColor: 'rgba(122,255,129,0.2)',
-            data: [<%= @ramens.where(men_genre: "ramen").count %>, <%= @ramens.where(men_genre: "tsukemen").count %>, <%= @ramens.where(men_genre: "shirunashi").count %>, <%= @ramens.where(men_genre: "others").count %>]
-            },
-        ]
-      },
-      options: {
-          scale: {
-              ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 5
-              }
-          }
-      }
-    });
+              label: "月別投稿数",
+              data: [<%= @chartdatas %>], // 縦軸にとるデータ(投稿数)
+              backgroundColor: 'rgba(255, 80, 120, 1.0)',
+              borderColor: 'rgba(255, 80, 120, 1.0)',
+              fill: false
+          },
+          ]
 
-    var ctx = document.getElementById("myChart3");
-    var myChart = new Chart(ctx, {
+      },
+
+  });
+
+  //麺類グラフ
+  var ctx = document.getElementById("myChart2");
+  var myChart = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ["醤油", "塩", "味噌", "豚骨", "豚骨醤油", "豚骨塩", "豚骨味噌", "魚介", "カレー", "その他"],
-        datasets:
-        [
-            {
-            label: "麺類",
-            backgroundColor: 'rgba(122,255,129,0.2)',
-            borderColor: 'rgba(122,255,129,0.2)',
-            data: [<%= @ramens.where(soup_genre: "shoyu").count %>, <%= @ramens.where(soup_genre: "shio").count %>, <%= @ramens.where(soup_genre: "miso").count %>, <%= @ramens.where(soup_genre: "tonkotsu").count %>, <%= @ramens.where(soup_genre: "tonkotsushoyu").count %>, <%= @ramens.where(soup_genre: "tonkotsushio").count %>, <%= @ramens.where(soup_genre: "tonkotsumiso").count %>, <%= @ramens.where(soup_genre: "seafood").count %>, <%= @ramens.where(soup_genre: "curry").count %>, <%= @ramens.where(soup_genre: "others").count %>]
-            },
-        ]
+          labels: ["ラーメン", "つけ麺", "汁なし", "その他"],
+          datasets: [{
+              label: "麺類",
+              data: [<%= @ramens.where(men_genre: "ramen").count %>, <%= @ramens.where(men_genre: "tsukemen").count %>, <%= @ramens.where(men_genre: "shirunashi").count %>, <%= @ramens.where(men_genre: "others").count %>],
+              backgroundColor: [
+                'rgba(122, 255, 129, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+              ],
+              borderColor: 'rgba(122,255,129,0.2)'
+          },]
       },
-      options: {
-          scale: {
-          }
-      }
-    });
+  });
+
+  //スープ類グラフ
+  var ctx = document.getElementById("myChart3");
+  var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+          labels: ["醤油", "塩", "味噌", "豚骨", "豚骨醤油", "豚骨塩", "豚骨味噌", "魚介", "カレー", "その他"],
+          datasets: [{
+              data: [<%= @ramens.where(soup_genre: "shoyu").count %>, <%= @ramens.where(soup_genre: "shio").count %>, <%= @ramens.where(soup_genre: "miso").count %>, <%= @ramens.where(soup_genre: "tonkotsu").count %>, <%= @ramens.where(soup_genre: "tonkotsushoyu").count %>, <%= @ramens.where(soup_genre: "tonkotsushio").count %>, <%= @ramens.where(soup_genre: "tonkotsumiso").count %>, <%= @ramens.where(soup_genre: "seafood").count %>, <%= @ramens.where(soup_genre: "curry").count %>, <%= @ramens.where(soup_genre: "others").count %>],
+              label: "スープ類",
+              backgroundColor: [
+                'rgba(122, 255, 129, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+              ],
+              borderColor: 'rgba(122,255,129,0.2)'
+          },]
+      },
+  });
+
+
+
+
 </script>
+<div class="row top-button">
+  <div class="col text-center">
+    <%= link_to "グラフ", customer_ramens_path, remote: true %>
+  </div>
+</div>
+
+<div class="row ramens">
+  <div class="col text-center">
+    <%= link_to "投稿一覧", customer_ramens_path, remote: true %>
+  </div>
+</div>
+
+
+

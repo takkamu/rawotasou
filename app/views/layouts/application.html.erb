@@ -5,59 +5,111 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-        <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if customer_signed_in? %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <%= link_to "HOME", ramens_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ", customer_path(current_customer), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            </ul>
+            <li class="form-inline my-2 my-lg-0">
+              <%= render "public/searches/search_form" %>
+            </li>
+
+          <% elsif admin_signed_in? %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to "投稿一覧", admin_ramens_path, class: "btn btn-outline-light rounded-pill ml-2" %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-light rounded-pill ml-2" %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %></a>
+              </li>
+            </ul>
+
+          <% else %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to 'ゲストログイン', customers_guest_sign_in_path, class: "btn btn-outline-secondary rounded-pill ml-2 sign_in", method: :post %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-primary rounded-pill ml-2" %></a>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </nav>
+
+      <!--<nav class="navbar navbar-expand-lg navbar-dark bg-warning">-->
+      <!--  <div class="container">-->
           <!--<#%= link_to root_path do %>-->
           <!--  <#%= image_tag 'logo_transparentnew.png', width:"240px", height:"100px" %>-->
           <!--<#% end %>-->
 
-          <ul class="navbar-nav d-flex align-items-right">
-            <% if customer_signed_in? %>
-              <li>
-                <%= render "public/searches/search_form" %>
-              </li>
-              <li>
-                <%= link_to "マイページ", customers_path(current_customer), class: "btn btn-outline-light rounded-pill ml-2" %>
-              </li>
-              <li>
-                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %>
-              </li>
+          <!--<ul class="navbar-nav d-flex align-items-right">-->
+          <!--  <#% if customer_signed_in? %>-->
+          <!--    <li>-->
+          <!--      <#%= render "public/searches/search_form" %>-->
+          <!--    </li>-->
+          <!--    <li>-->
+          <!--      <#%= link_to "マイページ", customer_path(current_customer), class: "btn btn-outline-light rounded-pill ml-2" %>-->
+          <!--    </li>-->
+          <!--    <li>-->
+          <!--      <#%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %>-->
+          <!--    </li>-->
 
-            <% elsif admin_signed_in? %>
+            <!--<#% elsif admin_signed_in? %>-->
 
-              <li>
-                <%= link_to "投稿一覧", admin_ramens_path, class: "btn btn-outline-light rounded-pill ml-2" %>
-              </li>
-              <li>
-                <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-light rounded-pill ml-2" %>
-              </li>
-              <li>
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %>
-              </li>
+            <!--  <li>-->
+            <!--    <#%= link_to "投稿一覧", admin_ramens_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            <!--  </li>-->
+            <!--  <li>-->
+            <!--    <#%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-light rounded-pill ml-2" %>-->
+            <!--  </li>-->
+            <!--  <li>-->
+            <!--    <#%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-danger rounded-pill ml-2" %>-->
+            <!--  </li>-->
 
-            <% else %>
+      <!--      <#% else %>-->
 
-              <li>
-              <%= link_to 'ゲストログイン', customers_guest_sign_in_path, class: "btn btn-outline-secondary rounded-pill ml-2 sign_in", method: :post %>
-              </li>
-              <li>
-                <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
-              </li>
-              <li>
-                <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
-              </li>
+      <!--        <li>-->
+      <!--        <#%= link_to 'ゲストログイン', customers_guest_sign_in_path, class: "btn btn-outline-secondary rounded-pill ml-2 sign_in", method: :post %>-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <#%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <#%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-primary rounded-pill ml-2" %>-->
+      <!--        </li>-->
 
-            <% end %>
-          </ul>
-        </div>
-      </nav>
+      <!--      <#% end %>-->
+      <!--    </ul>-->
+      <!--  </div>-->
+      <!--</nav>-->
     </header>
     <%= yield %>
   </body>

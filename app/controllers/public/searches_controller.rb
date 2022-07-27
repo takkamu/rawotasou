@@ -4,7 +4,7 @@ class Public::SearchesController < ApplicationController
   def search
     @range = params[:range]
 
-    if @range == "Customer"
+    if @range == "会員"
       @customers = Customer.looks(params[:search], params[:word])
     else
       @ramens = Ramen.looks(params[:search], params[:word])

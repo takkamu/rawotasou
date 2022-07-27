@@ -20,3 +20,22 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+//会員詳細ページのタブ切り替え
+jQuery(document).on('turbolinks:load', function(){
+  $('.top-button').on('click', function(){
+   
+      $('.top_post').css("display", "block")
+      $('.top_graph').css("display", "none")
+     
+ });
+ 
+   $('.ramens').on('click', function(){
+   
+      $('.graph').css("display", "block")
+      $('.top_post').css("display", "none")
+     
+ });
+
+});
+
+

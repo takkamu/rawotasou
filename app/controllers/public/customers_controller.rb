@@ -7,19 +7,10 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @ramens = @customer.ramens
 
-    #投稿数推移グラフ
-    #日別投稿数
-    @ramen_by_day = @ramens.group_by_day(:created_at).size
-    @chartlabels = @ramen_by_day.map(&:first).to_json.html_safe
-    @chartdatas = @ramen_by_day.map(&:second)
-
-    #累積投稿数
-    @cumulative = []
-    sum=0
-    @chartdatas.each do |a|
-      sum = sum + a
-      @cumulative<<sum
-    end
+    #月別投稿数推移グラフ
+    @ramen_by_month = @ramens.group_by_month(:created_at).size
+    @chartlabels = @ramen_by_month.map(&:first).to_json.html_safe
+    @chartdatas = @ramen_by_month.map(&:second)
   end
 
   def edit
@@ -50,6 +41,11 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     favorites= Favorite.where(customer_id: @customer.id).pluck(:ramen_id)
     @favorite_ramens = Ramen.find(favorites)
+  end
+
+  def ramens
+    @customer = Customer.find(params[:id])
+    @customer_ramens = @customer.ramens.order("created_at DESC")
   end
 
   private

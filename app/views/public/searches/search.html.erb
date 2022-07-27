@@ -2,7 +2,7 @@
 
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがCustomerの時 -->
-  <% if @range == "Customer" %>
+  <% if @range == "会員" %>
     <%= render "public/relationships/follow_list", customers: @customers %>
   <% else %>
     <!--検索対象モデルがCustomerではない時 -->
