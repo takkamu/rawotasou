@@ -7,19 +7,17 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @ramens = @customer.ramens
 
-    #投稿数推移グラフ
-    #日別投稿数
-    @ramen_by_day = @ramens.group_by_day(:created_at).size
-    @chartlabels = @ramen_by_day.map(&:first).to_json.html_safe
-    @chartdatas = @ramen_by_day.map(&:second)
+    #月別投稿数推移グラフ
+    @ramen_by_month = @ramens.group_by_month(:created_at).size
+    @chartlabels = @ramen_by_month.map(&:first).to_json.html_safe
+    @chartdatas = @ramen_by_month.map(&:second)
 
-    #累積投稿数
-    @cumulative = []
-    sum=0
-    @chartdatas.each do |a|
-      sum = sum + a
-      @cumulative<<sum
-    end
+    #会員別投稿一覧(新しい順)
+    @ramens_new_order = @customer.ramens.order("created_at DESC")
+
+    #フォロー
+    @alive_followings = @customer.followings.where(is_deleted: false)
+    @alive_followers = @customer.followers.where(is_deleted: false)
   end
 
   def edit

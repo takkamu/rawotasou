@@ -1,27 +1,26 @@
-<div class="container">
-  <div class="row">
-    <div class="col-3 text-right">
-      <h1>ラヲタ荘</h1>
-      <p>ラーメンであなたの生活を豊かに</p>
-      <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
-      <p>
-        食べたラーメンを記録するだけで<br>
-        あなたの生活を可視化できる<br>
+
+  <div class="jumbotron py-4 p-md-5 text-dark rounded bg-white">
+    <div class="col-md-6 px-0 text-right">
+      <h1 class="display-1 font-italic">ラヲタ荘</h1>
+      <p class="lead my-3">ラーメンであなたの生活を豊かにする</p>
+      <%= link_to "今すぐ始める", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+      <p class="mt-4">
+        食べたラーメンを投稿するだけで<br>
+        あなたのヲタ活を可視化できる<br>
         SNS型ラーメン記録サービス
       </p>
-      <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-    </div>
-    <div class="col-3">
-      画像
+      <p class="lead mb-0">ゲストログインは<%= link_to 'こちら', customers_guest_sign_in_path, method: :post %></p>
     </div>
   </div>
-  <div class="row">
-    <div class="new_ramen_container bg-warning">
-      <h2 class="text-center">最近投稿されたラーメン</h2>
-      <div class="card-deck">
-      <% @ramens.each do |ramen| %>
+</div>
 
-        <div class="card">
+<div class="album py-5" style="background-color: #FFFACD;">
+  <div class="container">
+    <h2 class="text-center mb-2">最近投稿されたラーメン</h2>
+    <div class="row">
+      <% @ramens.each do |ramen| %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
           <%= image_tag ramen.image, class: 'card-img-top' %>
           <div class="card-body">
             <h5 class="card-title"><%= ramen.restaurant_name %></h5>
@@ -32,87 +31,44 @@
             <p class="card-text"><small class="text-muted"><%= ramen.created_at.strftime("%Y年 %m月 %d日") %></small></p>
           </div>
         </div>
-
+      </div>
       <% end %>
-      </div>
-
     </div>
   </div>
-  <div class="row">
-    <div class="overview_container">
-      <div class="">
-        <div class="row flex-row bg-success text-center">
-          <div class="col-md-7 col">
-            <h2>あなたはラーメンを投稿するだけ</h2>
-            <p>
-              食べたラーメンの画像と情報を投稿するだけです。<br>
+</div>
+
+<div class="jumbotron py-4 p-md-5 text-dark rounded" style="background-color: #FFFFF0;">
+    <div class="row featurette">
+      <div class="col-md-6">
+        <h2 class="featurette-heading text-right">あなたはラーメンを投稿するだけ</h2>
+        <p class="lead text-right">食べたラーメンの画像と情報を投稿するだけです。<br>
+              ラヲタ荘があなたの投稿を自動で分析します。</p>
+      </div>
+      <div class="col-md-2">
+        {% include icons/p<br>laceholder.svg <br>width="500" height<br>="500" backgroun<br>d="#eee" color=<br>"#aaa" class="bd<br>-placeholder-img-l<br>g featurette-image img-fluid mx-auto" %}
+      </div>
+    </div>
+
+    <div class="row featurette mt-5">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">あなたはラーメンを投稿するだけ</h2>
+        <p class="lead">食べたラーメンの画像と情報を投稿するだけです。<br>
               ラヲタ荘があなたの投稿を自動で分析します。
-            </p>
-          </div>
-          <div class="col-md-5 col">
-            画像
-          </div>
-        </div>
-        <div class="row flex-row-reverse bg-warning">
-          <div class="col-md-7 col">
-            <h2>あなたはラーメンを投稿するだけ</h2>
-            <p>
-              食べたラーメンの画像と情報を投稿するだけです。<br>
-              ラヲタ荘があなたの投稿を自動で分析します。
-            </p>
-          </div>
-          <div class="col-md-5 col">
-            画像
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row" style="background-color: #F5F2EC;">
-  <div class="col-md-7 col p-0">
-    <div class="content text-center">
-      <div class="text">
-        <h2 class="title">あなたはラーメンを投稿するだけ</h2>
-        <p class="large">
-          食べたラーメンの画像と情報を投稿するだけです。<br>
-          ラヲタ荘があなたの投稿を自動で分析します。
         </p>
-        <%= link_to "詳細はこちら" , new_customer_registration_path ,class: "btn" %>
       </div>
-
-    </div>
-  </div>
-  <div class="col-md-5 col p-0">
-    <div class="main-visual_image">
-      <%=image_tag "no_image.jpg"%>
-    </div>
-  </div>
-</div>
-
-<div class="row" style="background-color: #F5F2EC;">
-  <div class="col-md-5 col p-0">
-    <div class="main-visual_image">
-      <%=image_tag "no_image.jpg"%>
-    </div>
-  </div>
-  <div class="col-md-7 col p-0">
-    <div class="content">
-      <div class="text">
-        <h2 class="title">あなたはラーメンを投稿するだけ</h2>
-        <p class="large">
-          食べたラーメンの画像と情報を投稿するだけです。<br>
-          ラヲタ荘があなたの投稿を自動で分析します。
-        </p>
-        <%= link_to "詳細はこちら" , new_customer_registration_path ,class: "btn" %>
+      <div class="col-md-5 order-md-1 text-right">
+        {% include icons/placeholder.svg width="500" height="500" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto" %}
       </div>
-
     </div>
-  </div>
-</div>
 
-<h1>ラヲタ荘</h1>
-<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-<%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
-<%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+    <div class="row featurette mt-5">
+      <div class="col-md-7">
+        <h2 class="featurette-heading text-right">あなたはラーメンを投稿するだけ</h2>
+        <p class="lead text-right">食べたラーメンの画像と情報を投稿するだけです。<br>
+              ラヲタ荘があなたの投稿を自動で分析します。</p>
+      </div>
+      <div class="col-md-5">
+        {% include icons/placeholder.svg width="500" height="500" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto" %}
+      </div>
+    </div>
+</div>

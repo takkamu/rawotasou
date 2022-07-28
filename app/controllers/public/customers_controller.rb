@@ -17,10 +17,7 @@ class Public::CustomersController < ApplicationController
 
     #会員がいいねした投稿一覧
     favorites = Favorite.where(customer_id: @customer.id).pluck(:ramen_id)
-    #byebug
     @ramens_favorite = Ramen.where(id: favorites).order("created_at DESC")
-    #@ramens_favorite = Ramen.find(favorites).order("created_at DESC")
-    #byebug
 
     #フォロー
     @alive_followings = @customer.followings.where(is_deleted: false)
@@ -49,8 +46,6 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     @customer.update(is_deleted: true)
     reset_session
-    # @ramens = @customer.ramens
-    # @ramen.destroy
     redirect_to root_path
   end
 
