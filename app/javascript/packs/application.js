@@ -20,3 +20,32 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+//会員詳細ページのタブ切り替え
+jQuery(document).on('turbolinks:load', function(){
+  $('.graphs-link').on('click', function(){
+
+        $('.graphs').css("display", "block")
+        $('.ramens').css("display", "none")
+        $('.favorites').css("display", "none")
+
+ });
+
+   $('.ramens-link').on('click', function(){
+
+        $('.ramens').css("display", "block")
+        $('.graphs').css("display", "none")
+        $('.favorites').css("display", "none")
+
+ });
+
+    $('.favorites-link').on('click', function(){
+
+        $('.favorites').css("display", "block")
+        $('.graphs').css("display", "none")
+        $('.ramens').css("display", "none")
+
+ });
+
+});
+
+
