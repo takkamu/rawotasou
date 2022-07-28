@@ -22,6 +22,7 @@ customers = Customer.create!(
 
 Ramen.create!(
   [
+
     {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen4.jpg"), filename:"ramen4.jpg"), restaurant_name: '池田家', men_genre: 'ramen', soup_genre: 'shoyu', impression: 'おいしかった', customer_id: Customer.find(1).id },
     {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen4.jpg"), filename:"ramen4.jpg"), restaurant_name: '田中家', men_genre: 'tsukemen', soup_genre: 'miso', impression: 'これはうまい', customer_id: Customer.find(1).id },
     {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen4.jpg"), filename:"ramen4.jpg"), restaurant_name: '中身家', men_genre: 'shirunashi', soup_genre: 'tonkotsu', impression: '最高！', customer_id: Customer.find(1).id }
