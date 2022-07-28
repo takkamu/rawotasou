@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
     @customers = Customer.all
   end
@@ -52,6 +54,6 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:email, :name)
+    params.require(:customer).permit(:email, :name, :introduction)
   end
 end

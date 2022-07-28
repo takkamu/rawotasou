@@ -1,5 +1,5 @@
 class Public::RamensController < ApplicationController
-  before_action :authenticate_customer!, except: [:index]
+  before_action :authenticate_customer!
 
   def new
     @ramen = Ramen.new

@@ -1,4 +1,5 @@
 class Admin::RamensController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @alive_customers = Customer.where(is_deleted: false)
