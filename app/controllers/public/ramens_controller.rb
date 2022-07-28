@@ -1,5 +1,5 @@
 class Public::RamensController < ApplicationController
-  before_action :authenticate_customer!, except: [:index]
+  before_action :authenticate_customer!
 
   def new
     @ramen = Ramen.new
@@ -7,25 +7,38 @@ class Public::RamensController < ApplicationController
 
   def create
     @ramen = Ramen.new(ramen_params)
-    @ramens = Ramen.all
+    @ramens = Ramen.limit(20).order("created_at DESC")
     @ramen.customer_id = current_customer.id
+
+    levelSetting = LevelSetting.find_by(level: current_customer.level + 1);
     if @ramen.save
+      current_customer.update(experience_point: current_customer.experience_point + 10)
+        if levelSetting.thresold <= current_customer.experience_point
+          current_customer.level = current_customer.level + 1
+          current_customer.update(level: current_customer.level)
+        end
     else
       render :index
     end
   end
 
+
   def index
-    @ramens = Ramen.all
+    @alive_customers = Customer.where(is_deleted: false)
+    @ramens = Ramen.where(customer: @alive_customers).limit(20).order("created_at DESC")
     @ramen = Ramen.new
   end
 
   def destroy
-    @ramen_destroy = Ramen.find(params[:id])
-    @ramen_destroy.destroy
-    redirect_to customer_path(current_customer)
+    @ramen = Ramen.find(params[:id])
+    @ramen.destroy
+    redirect_to ramens_path
   end
 
+  # def rank
+  # # ユーザーの投稿数ランキング
+  # @customer_ramen_ranks = Customer.where(id: Ramen.group(:customer_id).order('count(customer_id) desc').pluck(:customer_id))
+  # end
 
 
   private

@@ -1,37 +1,28 @@
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th>ユーザーネーム</th>
-      <th>画像</th>
-      <th>ショップ名</th>
-      <th>麺類</th>
-      <th>スープ</th>
-      <th>感想</th>
-      <th>いいね</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% ramens.each do |ramen| %>
-      <tr>
-        <td>
-          <%= link_to customer_path(ramen.customer) do %>
-            <%= ramen.customer.name %>
-          <% end %>
-        </td>
-        <td><%= image_tag ramen.image, size:"200x200" %></td>
-        <td><%= ramen.restaurant_name %></td>
-        <td><%= ramen.men_genre_i18n %></td>
-        <td><%= ramen.soup_genre_i18n %></td>
-        <td><%= ramen.impression %></td>
-        <td id="favorite_buttons_<%= ramen.id %>">
-          <%= render "public/favorites/favorite", ramen: ramen %>
-        </td>
-        <% if ramen.customer == current_customer %>
-          <td><%= link_to 'Destroy', @ramen_destroy, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
+<% ramens.each do |ramen| %>
+<div class="media border rounded-lg mb-2 bg-white">
+  <div class="p-3">
+    <%= image_tag ramen.image, size:"250x200" %>
+  </div>
+  <div class="media-body p-3">
+    <h4 class="mt-0"><%= ramen.restaurant_name %></h4>
+    <p>
+      [ <%= ramen.men_genre_i18n %> / <%= ramen.soup_genre_i18n %> ]
+      <%= link_to customer_path(ramen.customer) do %>
+        <%= ramen.customer.name %>
+      <% end %>
+    </p>
+    <p>
+      <%= ramen.impression %>
+    </p>
+      <%= ramen.created_at.strftime("%Y年 %m月 %d日") %>
+      <span class="ml-3", id="favorite_buttons_<%= ramen.id %>">
+        <%= render "public/favorites/favorite", ramen: ramen %>
+      </span>
+      <% if ramen.customer == current_customer %>
+        <span>
+          <%= link_to 'Destroy', ramen_path(ramen), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+        </span>
+      <% end %>
+  </div>
+</div>
+<% end %>

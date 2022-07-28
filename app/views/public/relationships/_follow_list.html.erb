@@ -1,17 +1,19 @@
-<table class='table'>
+<table class='table table-striped text-center'>
   <thead>
     <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
+      <th>名前</th>
+      <th>レベル</th>
+      <th>フォロー</th>
+      <th>フォロワー</th>
     </tr>
   </thead>
   <tbody>
     <% customers.each do |customer| %>
     <tr>
       <td><%= link_to customer.name, customer, class: "customer_#{customer.id}" %></td>
-      <td>フォロー数: <%= customer.followings.count %></td>
-      <td>フォロワー数: <%= customer.followers.count %></td>
+      <td><%= customer.level %> Lv</td>
+      <td><%= customer.followings.count %> 人</td>
+      <td><%= customer.followers.count %> 人</td>
     </tr>
     <% end %>
   </tbody>

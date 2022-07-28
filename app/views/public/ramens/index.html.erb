@@ -1,57 +1,60 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-3">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        新規投稿
-      </button>
-    </div>
-    <div class="col-9 ramens">
-      <%= render "ramens", ramens: @ramens %>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+<div style="background-color: #FFFFF0;">
+  <div class="container">
+    <div class="row">
+      <div class="col-3 mt-5">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          新規投稿
         </button>
       </div>
-      <%= form_with model: @ramen, url: ramens_path, local: false do  |f| %>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="inputTitle">画像</label><br>
-            <%= f.file_field :image, accept: "image/*" %>
-          </div>
-          <div class="form-group">
-            <label for="inputTitle">店名</label><br>
-            <%= f.text_field :restaurant_name, type:"text", class:"form-control" %>
-          </div>
-          <div class="form-group">
-            <label for="inputMenGenre">麺類</label><br>
-            <%= f.select :men_genre, Ramen.men_genres.keys.map {|k| [I18n.t("enums.ramen.men_genre.#{k}"), k]} %>
-          </div>
-          <div class="form-group">
-            <label for="inputSoupGenre">スープ</label><br>
-            <%= f.select :soup_genre, Ramen.soup_genres.keys.map {|k| [I18n.t("enums.ramen.soup_genre.#{k}"), k]} %>
-          </div>
-          <div class="form-group">
-            <label for="inputOpinion">感想</label><br>
-            <%= f.text_area :impression, type:"text", class:"form-control" %>
-          </div>
+      <div class="col-9 ramens mt-5">
+        <%= render "ramens", ramens: @ramens %>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit '投稿', class: "btn btn-success" %>
-        </div>
-      <% end %>
+        <%= form_with model: @ramen, url: ramens_path, local: false do  |f| %>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="inputTitle">画像</label><br>
+              <%= f.file_field :image, accept: "image/*" %>
+            </div>
+            <div class="form-group">
+              <label for="inputTitle">店名（20文字以内）</label><br>
+              <%= f.text_field :restaurant_name, type:"text", class:"form-control" %>
+            </div>
+            <div class="form-group">
+              <label for="inputMenGenre">麺類</label><br>
+              <%= f.select :men_genre, Ramen.men_genres.keys.map {|k| [I18n.t("enums.ramen.men_genre.#{k}"), k]} %>
+            </div>
+            <div class="form-group">
+              <label for="inputSoupGenre">スープ</label><br>
+              <%= f.select :soup_genre, Ramen.soup_genres.keys.map {|k| [I18n.t("enums.ramen.soup_genre.#{k}"), k]} %>
+            </div>
+            <div class="form-group">
+              <label for="inputOpinion">感想（200文字以内）</label><br>
+              <%= f.text_area :impression, type:"text", class:"form-control" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            <%= f.submit '投稿', class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
-
+<!--ランキング機能実装予定-->
+<!--<#%= render "public/ranks/rank", ramen_ranks: @customer_ramen_ranks %>-->

@@ -1,13 +1,13 @@
 <% if ramen.favorited_by?(current_customer) %>
   <p>
     <%= link_to ramen_favorites_path(ramen), method: :delete, remote: true do %>
-      ♥<%= ramen.favorites.count %> いいね
+      ♥<%= ramen.favorites_only_alive.count %>
     <% end %>
   </p>
   <% else %>
   <p>
     <%= link_to ramen_favorites_path(ramen), method: :post, remote: true do %>
-      ♡<%= ramen.favorites.count %> いいね
+      ♡<%= ramen.favorites_only_alive.count %>
     <% end %>
   </p>
 <% end %>
