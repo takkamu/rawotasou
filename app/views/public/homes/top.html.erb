@@ -1,15 +1,20 @@
 
   <div class="jumbotron py-4 p-md-5 text-dark rounded bg-white">
-    <div class="col-md-6 px-0 text-right">
-      <h1 class="display-1 font-italic">ラヲタ荘</h1>
-      <p class="lead my-3">ラーメンであなたの生活を豊かにする</p>
-      <%= link_to "今すぐ始める", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
-      <p class="mt-4">
-        食べたラーメンを投稿するだけで<br>
-        あなたのヲタ活を可視化できる<br>
-        SNS型ラーメン記録サービス
-      </p>
-      <p class="lead mb-0">ゲストログインは<%= link_to 'こちら', customers_guest_sign_in_path, method: :post %></p>
+    <div class="row featurette">
+      <div class="col-md-6 px-0 text-right">
+        <h1 class="display-1 font-italic">ラヲタ荘</h1>
+        <p class="lead my-3">ラーメンであなたの生活を豊かにする</p>
+        <%= link_to "今すぐ始める", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+        <p class="mt-4">
+          食べたラーメンを投稿するだけで<br>
+          あなたのヲタ活を可視化できる<br>
+          SNS型ラーメン記録サービス
+        </p>
+        <p class="lead mb-0">ゲストログインは<%= link_to 'こちら', customers_guest_sign_in_path, method: :post %></p>
+      </div>
+      <div class="col-md-6 pl-5">
+        <%= image_tag 'ramen_syouyu.png', width: '60%', height: '100%' %>
+      </div>
     </div>
   </div>
 </div>
@@ -38,37 +43,40 @@
 </div>
 
 <div class="jumbotron py-4 p-md-5 text-dark rounded" style="background-color: #FFFFF0;">
-    <div class="row featurette">
-      <div class="col-md-6">
-        <h2 class="featurette-heading text-right">あなたはラーメンを投稿するだけ</h2>
-        <p class="lead text-right">食べたラーメンの画像と情報を投稿するだけです。<br>
-              ラヲタ荘があなたの投稿を自動で分析します。</p>
-      </div>
-      <div class="col-md-2">
-        {% include icons/p<br>laceholder.svg <br>width="500" height<br>="500" backgroun<br>d="#eee" color=<br>"#aaa" class="bd<br>-placeholder-img-l<br>g featurette-image img-fluid mx-auto" %}
-      </div>
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading text-right">あなたはラーメンを投稿するだけ</h2>
+      <p class="lead text-right">
+        食べたラーメンの画像と情報を投稿するだけです。<br>
+        ラヲタ荘があなたの投稿を自動で分析します。
+      </p>
     </div>
+    <div class="col-md-5">
+      <%= image_tag 'food_ramen_woman.png', width: '50%', height: '80%' %>
+    </div>
+  </div>
 
-    <div class="row featurette mt-5">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">あなたはラーメンを投稿するだけ</h2>
-        <p class="lead">食べたラーメンの画像と情報を投稿するだけです。<br>
-              ラヲタ荘があなたの投稿を自動で分析します。
-        </p>
-      </div>
-      <div class="col-md-5 order-md-1 text-right">
-        {% include icons/placeholder.svg width="500" height="500" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto" %}
-      </div>
+  <div class="row featurette mt-5">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading">ヲタ活を記録しグラフ化</h2>
+      <p class="lead">
+        投稿によって今まで食べたラーメンの情報がグラフで描画されます。<br>
+        あなたのヲタ活記録がひと目でわかります。
+      </p>
     </div>
+    <div class="col-md-5 order-md-1 text-right">
+      <%= image_tag 'whiteboard_memo_man2.png', width: '50%', height: '90%' %>
+    </div>
+  </div>
 
-    <div class="row featurette mt-5">
-      <div class="col-md-7">
-        <h2 class="featurette-heading text-right">あなたはラーメンを投稿するだけ</h2>
-        <p class="lead text-right">食べたラーメンの画像と情報を投稿するだけです。<br>
-              ラヲタ荘があなたの投稿を自動で分析します。</p>
-      </div>
-      <div class="col-md-5">
-        {% include icons/placeholder.svg width="500" height="500" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto" %}
-      </div>
-    </div>
+    <!--<div class="row featurette mt-5">-->
+    <!--  <div class="col-md-7">-->
+    <!--    <h2 class="featurette-heading text-right">あなたはラーメンを投稿するだけ</h2>-->
+    <!--    <p class="lead text-right">食べたラーメンの画像と情報を投稿するだけです。<br>-->
+    <!--          ラヲタ荘があなたの投稿を自動で分析します。</p>-->
+    <!--  </div>-->
+    <!--  <div class="col-md-5">-->
+    <!--    {% include icons/placeholder.svg width="500" height="500" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto" %}-->
+    <!--  </div>-->
+    <!--</div>-->
 </div>
