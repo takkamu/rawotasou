@@ -16,12 +16,16 @@ class Public::CustomersController < ApplicationController
     @ramens_new_order = @customer.ramens.order("created_at DESC")
 
     #会員がいいねした投稿一覧
-    favorites= Favorite.where(customer_id: @customer.id).pluck(:ramen_id)
+    favorites = Favorite.where(customer_id: @customer.id).pluck(:ramen_id)
     #byebug
     @ramens_favorite = Ramen.where(id: favorites).order("created_at DESC")
     #@ramens_favorite = Ramen.find(favorites).order("created_at DESC")
     #byebug
-    
+
+    #フォロー
+    @alive_followings = @customer.followings.where(is_deleted: false)
+    @alive_followers = @customer.followers.where(is_deleted: false)
+
   end
 
   def edit
@@ -49,17 +53,6 @@ class Public::CustomersController < ApplicationController
     # @ramen.destroy
     redirect_to root_path
   end
-
-  # def favorites
-  #   @customer = Customer.find(params[:id])
-  #   favorites= Favorite.where(customer_id: @customer.id).pluck(:ramen_id)
-  #   @favorite_ramens = Ramen.find(favorites)
-  # end
-
-  # def ramens
-  #   @customer = Customer.find(params[:id])
-  #   @customer_ramens = @customer.ramens.order("created_at DESC")
-  # end
 
   private
 
