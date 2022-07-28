@@ -22,16 +22,25 @@ customers = Customer.create!(
 
 Ramen.create!(
   [
-    {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen7.JPG"), filename:"ramen7.JPG"), restaurant_name: '池田家', men_genre: 'tsukemen', soup_genre: 'miso', impression: 'おいしかった', customer_id: Customer.find(1).id }
+
+    {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen4.jpg"), filename:"ramen4.jpg"), restaurant_name: '池田家', men_genre: 'ramen', soup_genre: 'shoyu', impression: 'おいしかった', customer_id: Customer.find(1).id },
+    {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen4.jpg"), filename:"ramen4.jpg"), restaurant_name: '田中家', men_genre: 'tsukemen', soup_genre: 'miso', impression: 'これはうまい', customer_id: Customer.find(1).id },
+    {image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ramen4.jpg"), filename:"ramen4.jpg"), restaurant_name: '中身家', men_genre: 'shirunashi', soup_genre: 'tonkotsu', impression: '最高！', customer_id: Customer.find(1).id }
   ]
 )
 
 LevelSetting.create!(
   [
     {level: 2, thresold:30},
-    {level: 3, thresold:30},
-    {level: 4, thresold:30},
-    {level: 5, thresold:30},
-    {level: 6, thresold:30}
+    {level: 3, thresold:70},
+    {level: 4, thresold:120},
+    {level: 5, thresold:180},
+    {level: 6, thresold:250}
     ]
+)
+
+Admin.create!(
+  [
+    {email: 'admin@test.com', password: 'testadad'}
+  ]
 )
