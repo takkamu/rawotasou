@@ -1,7 +1,7 @@
 class Admin::RamensController < ApplicationController
 
   def index
-    @ramens = Ramen.all
+    @ramens = Ramen.all.order("created_at DESC")
   end
 
   def destroy
