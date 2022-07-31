@@ -8,3 +8,5 @@ $('#exampleModal').attr('aria-hidden', 'true');
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
 $('.ramens').html("<%= escape_javascript(render 'ramens', ramens: @ramens) %>");
+<!--<%# binding.pry %>-->
+$('.ramen_ranks').html("<%= escape_javascript(render 'public/ranks/rank', ramen_ranks: @customer_ramen_ranks) %>");
