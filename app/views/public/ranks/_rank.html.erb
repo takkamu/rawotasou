@@ -1,9 +1,14 @@
-<!--配列の1つ目から順に1位、２位と表示される-->
-<% ramen_ranks.each.with_index(1) do |ramen, i| %>
-  第<%= i %>位
-:
-<!--表示したいカラムをご自由に-->
-<%= ramen.name %>
-<%= ramen.level %>Lv
-EXP<%= ramen.experience_point %>
-<% end %>
+<div class="border rounded-lg bg-white">
+  <h4 class="text-center">ランキング</h4>
+  <table class="table table-hover">
+    <tbody>
+      <% ramen_ranks.each.with_index(1) do |ramen, i| %>
+      <tr>
+        <th scope="row">第<%= i %>位</th>
+        <td><%= ramen.name %></td>
+        <td><%= ramen.level %>Lv</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
