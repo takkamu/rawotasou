@@ -5,7 +5,11 @@
       <% ramen_ranks.each.with_index(1) do |ramen, i| %>
       <tr>
         <th scope="row">第<%= i %>位</th>
-        <td><%= ramen.name %></td>
+        <td>
+          <%= link_to customer_path(ramen) do %>
+            <%= ramen.name %>
+          <% end %>
+        </td>
         <td><%= ramen.level %>Lv</td>
       </tr>
       <% end %>
