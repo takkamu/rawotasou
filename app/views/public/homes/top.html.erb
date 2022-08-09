@@ -1,20 +1,18 @@
-
-  <div class="jumbotron py-4 p-md-5 text-dark rounded bg-white">
-    <div class="row featurette">
-      <div class="col-md-6 px-0 text-right">
-        <h1 class="display-1 font-italic">ラヲタ荘</h1>
-        <p class="lead my-3">ラーメンであなたの生活を豊かにする</p>
-        <%= link_to "今すぐ始める", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
-        <p class="mt-4">
-          食べたラーメンを投稿するだけで<br>
-          あなたのヲタ活を可視化できる<br>
-          SNS型ラーメン記録サービス
-        </p>
-        <p class="lead mb-0">ゲストログインは<%= link_to 'こちら', customers_guest_sign_in_path, method: :post %></p>
-      </div>
-      <div class="col-md-6 pl-5">
-        <%= image_tag 'ramen_syouyu.png', width: '60%', height: '100%' %>
-      </div>
+<div class="jumbotron py-4 p-md-5 text-dark rounded bg-white">
+  <div class="row featurette">
+    <div class="col-md-6 px-0 text-right">
+      <h1 class="display-1 font-italic">ラヲタ荘</h1>
+      <p class="lead my-3">ラーメンであなたの生活を豊かにする</p>
+      <%= link_to "今すぐ始める", new_customer_registration_path, class: "btn btn-outline-primary rounded-pill ml-2" %>
+      <p class="mt-4">
+        食べたラーメンを投稿するだけで<br>
+        あなたのヲタ活を可視化できる<br>
+        SNS型ラーメン記録サービス
+      </p>
+      <p class="lead mb-0">ゲストログインは<%= link_to 'こちら', customers_guest_sign_in_path, method: :post %></p>
+    </div>
+    <div class="col-md-6 pl-5">
+      <%= image_tag 'ramen_syouyu.png', width: '60%', height: '100%' %>
     </div>
   </div>
 </div>
