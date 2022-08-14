@@ -1,19 +1,21 @@
 <div style="background-color: #FFFFF0;">
   <div class="container">
     <div class="row">
-      <div class="col-3 mt-5">
+      <div class="col-1 mt-5">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          新規投稿
+          +
         </button>
       </div>
-      <div class="col-9 ramens mt-5">
+      <div class="col-8 ramens mt-5">
         <%= render "ramens", ramens: @ramens %>
+      </div>
+      <div class="col-3 ramen_ranks mt-5">
+        <%= render "public/ranks/rank", ramen_ranks: @customer_ramen_ranks %>
       </div>
     </div>
   </div>
 
-
-
+<!--新規投稿modal-->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -55,6 +57,3 @@
     </div>
   </div>
 </div>
-
-<!--ランキング機能実装予定-->
-<!--<#%= render "public/ranks/rank", ramen_ranks: @customer_ramen_ranks %>-->

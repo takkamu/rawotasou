@@ -35,22 +35,22 @@
 <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-light" style="background-color: #FFFACD;">
     <div class="col text-center graphs-link">
-      <%= link_to "グラフ", remote: true %>
+      グラフ
     </div>
   </button>
   <button type="button" class="btn btn-light" style="background-color: #FFFACD;">
     <div class="col text-center ramens-link">
-      <%= link_to "投稿", remote: true %>
+      投稿
     </div>
   </button>
   <button type="button" class="btn btn-light" style="background-color: #FFFACD;">
     <div class="col text-center favorites-link">
-      <%= link_to "いいね", remote: true %>
+      いいね
     </div>
   </button>
 </div>
 
-<!--グラフ-->
+<!--グラフ一覧-->
 <div class="container mt-3 graphs" style="display: none;">
   <div class="row d-flex justify-content-center">
     <div class="col-sm-10">
@@ -92,10 +92,7 @@
   </div>
 </div>
 
-
-
-
-
+<!--グラフ-->
 <script>
   //月別投稿数推移グラフ
   var ctx = document.getElementById("myChart").getContext('2d');
@@ -113,8 +110,8 @@
             {
               label: "月別投稿数",
               data: [<%= @chartdatas %>], // 縦軸にとるデータ(投稿数)
-              backgroundColor: 'rgba(255, 80, 120, 1.0)',
-              borderColor: 'rgba(255, 80, 120, 1.0)',
+              backgroundColor: 'rgba(255, 75, 0, 0.8)',
+              borderColor: 'rgba(255, 255, 255, 0.8)',
               fill: false
           },
           ]
@@ -133,12 +130,12 @@
               label: "麺類",
               data: [<%= @ramens.where(men_genre: "ramen").count %>, <%= @ramens.where(men_genre: "tsukemen").count %>, <%= @ramens.where(men_genre: "shirunashi").count %>, <%= @ramens.where(men_genre: "others").count %>],
               backgroundColor: [
-                'rgba(122, 255, 129, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
+                'rgba(255, 75, 0, 0.8)',
+                'rgba(0, 90, 255, 0.8)',
+                'rgba(3, 175, 122, 0.8)',
+                'rgba(77, 196, 255, 0.8)'
               ],
-              borderColor: 'rgba(122,255,129,0.2)'
+              borderColor: 'rgba(255, 255, 255, 0.8)'
           },]
       },
   });
@@ -153,23 +150,19 @@
               data: [<%= @ramens.where(soup_genre: "shoyu").count %>, <%= @ramens.where(soup_genre: "shio").count %>, <%= @ramens.where(soup_genre: "miso").count %>, <%= @ramens.where(soup_genre: "tonkotsu").count %>, <%= @ramens.where(soup_genre: "tonkotsushoyu").count %>, <%= @ramens.where(soup_genre: "tonkotsushio").count %>, <%= @ramens.where(soup_genre: "tonkotsumiso").count %>, <%= @ramens.where(soup_genre: "seafood").count %>, <%= @ramens.where(soup_genre: "curry").count %>, <%= @ramens.where(soup_genre: "others").count %>],
               label: "スープ類",
               backgroundColor: [
-                'rgba(122, 255, 129, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
+                'rgba(255, 75, 0, 0.8)',
+                'rgba(0, 90, 255, 0.8)',
+                'rgba(3, 175, 122, 0.8)',
+                'rgba(77, 196, 255, 0.8)',
+                'rgba(246, 170, 0, 0.8)',
+                'rgba(255, 241, 0, 0.8)',
+                'rgba(0, 0, 0, 0.8)',
+                'rgba(153, 0, 153, 0.8)',
+                'rgba(136, 34, 58, 0.8)',
+                'rgba(132, 145, 158, 0.8)'
               ],
-              borderColor: 'rgba(122,255,129,0.2)'
+              borderColor: 'rgba(255, 255, 255, 0.8)'
           },]
       },
   });
 </script>
-
-
-
-

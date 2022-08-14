@@ -1,14 +1,11 @@
 class Public::RamensController < ApplicationController
   before_action :authenticate_customer!
 
-  def new
-    @ramen = Ramen.new
-  end
-
   def create
     @ramen = Ramen.new(ramen_params)
     @ramens = Ramen.limit(20).order("created_at DESC")
     @ramen.customer_id = current_customer.id
+    @customer_ramen_ranks = Customer.where(id: Ramen.group(:customer_id).order('count(customer_id) desc').pluck(:customer_id))
 
     levelSetting = LevelSetting.find_by(level: current_customer.level + 1);
     if @ramen.save
@@ -22,11 +19,11 @@ class Public::RamensController < ApplicationController
     end
   end
 
-
   def index
     @alive_customers = Customer.where(is_deleted: false)
     @ramens = Ramen.where(customer: @alive_customers).limit(20).order("created_at DESC")
     @ramen = Ramen.new
+    @customer_ramen_ranks = Customer.where(id: Ramen.group(:customer_id).order('count(customer_id) desc').pluck(:customer_id))
   end
 
   def destroy
@@ -34,11 +31,6 @@ class Public::RamensController < ApplicationController
     @ramen.destroy
     redirect_to ramens_path
   end
-
-  # def rank
-  # # ユーザーの投稿数ランキング
-  # @customer_ramen_ranks = Customer.where(id: Ramen.group(:customer_id).order('count(customer_id) desc').pluck(:customer_id))
-  # end
 
 
   private
