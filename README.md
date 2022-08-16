@@ -28,18 +28,18 @@
 
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux2(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
-##その他使用技術
+## その他使用技術
 - ユーザー認証(devise)
 - 画像アップロード機能(ActiveStorage)
 - 非同期通信(投稿・いいね・フォローの各種ボタン、投稿の即時反映、タブ)
 - グラフ描画(chart.js)
-- HTTPS接続
+- HTTPS接続(Certbot)
 - チーム開発を意識したGitHubの活用
 - 自動デプロイ(GitHub Actions(CI/CDツール))
 
