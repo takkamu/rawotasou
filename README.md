@@ -4,6 +4,9 @@
 ### サイトテーマ
 食べたラーメンを投稿し、記録するレビューサイト
 
+## URL
+https://rawotasou.com
+
 ### テーマを選んだ理由
 インスタグラムには常にラーメンの写真が投稿されているほどラーメン好きが多い印象です。そんな私もラーメンを年間100食以上食べるラーメンヲタクです。
 これまで食べたラーメンの件数やスープの種類などを記録し、自分や友人のデータを見れるようになれば面白いのではないかと考えました。
@@ -24,8 +27,9 @@
 - ER図
 ![ER_diagram](https://user-images.githubusercontent.com/104718319/185045110-b75c4ab5-e8b1-4bfd-ad42-644c79052b79.png)
 - テーブル定義書
+https://docs.google.com/spreadsheets/d/1awxrbvdYX6RhUxEjxoA6QBG_nWvyg7tBs46uf_epmSY/edit#gid=1373217982
 - アプリケーション詳細設計
-- 画面遷移図
+https://docs.google.com/spreadsheets/d/1JQFSO_HRw3B1S_E0fQPFcVljKven9_tiFmqS32PG1lY/edit#gid=2133469642
 
 
 ## 開発環境
@@ -45,4 +49,5 @@
 - 自動デプロイ(GitHub Actions(CI/CDツール))
 
 ## 使用素材
-- フリー素材ドットコム(https://free-materials.com)
+- フリー素材ドットコム
+https://free-materials.com
