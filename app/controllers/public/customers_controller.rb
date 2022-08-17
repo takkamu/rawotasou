@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_customer, only: [:edit, :update]
 
   def show
     @customer = Customer.find(params[:id])
@@ -25,11 +25,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     if @customer.update(customer_params)
       redirect_to customer_path(@customer)
     else
@@ -53,11 +53,8 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:email, :name, :introduction)
   end
-  
-  def correct_user
-    @customer = Customer.find(params[:id])
-    unless @customer = current_customer
-      redirect_to root_path
-    end
+
+  def correct_customer
+    @customer = current_customer
   end
 end
