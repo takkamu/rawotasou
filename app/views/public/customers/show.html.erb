@@ -20,9 +20,11 @@
   </span>
   </p>
   <p>
+    <% if @customer != current_customer %>
     <span id="follow_buttons_<%= @customer.id %>">
       <%= render "public/relationships/follow", customer: @customer %>
     </span>
+    <% end %>
     <% if @customer == current_customer %>
       <span class="ml-3">
         <%= link_to '編集', edit_customer_path(@customer), class: "btn btn-light rounded-pill ml-2" %>

@@ -55,5 +55,7 @@ https://docs.google.com/spreadsheets/d/1JQFSO_HRw3B1S_E0fQPFcVljKven9_tiFmqS32PG
 - 自動デプロイ(GitHub Actions(CI/CDツール))
 
 ## 使用素材
+- いらすとや
+https://www.irasutoya.com/
 - フリー素材ドットコム
 https://free-materials.com
